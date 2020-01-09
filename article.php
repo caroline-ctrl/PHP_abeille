@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('connection_bdd.php');
+include('connection_bdd.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ include ('connection_bdd.php');
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">* HELLO 
+        <a class="navbar-brand" href="index.php">* HELLO
             <?php
             if (isset($_COOKIE['gateauChoco'])) {
                 echo $_COOKIE['gateauChoco'];
@@ -43,33 +43,71 @@ include ('connection_bdd.php');
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
             <div>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="inscription.php">Inscription</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="connexion.php">Connection</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="deconnexion.php">Deconnection</a>
-                </li>
-                </div>
-                <div class="navbar-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="inscription.php">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="connexion.php">Connection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="deconnexion.php">Deconnection</a>
+                    </li>
+            </div>
+            <div class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link text-right" href="article.php">Ecrire un article</a>
                 </li>
-                </div>
+            </div>
             </ul>
         </div>
     </nav>
 
     <div class="container bg-blanc" style="margin-top:30px">
 
+        <?php
+            //recupère id, pseudo et id_type en fonction du pseudo dans le cookie
+            $req = $bdd->prepare('SELECT id, pseudo, id_type FROM membre WHERE pseudo = ?');
+            $req->execute(array($_COOKIE['gateauChoco']));
+            $verif = $req->fetch();
+            //si le pseudo a le type_genre = à 2 autorisé à modifier les articles
+                if($verif['id_type'] == 2){
+                    ?>
+                    <!-- pour ajouter un billet -->
+            <form action="admin_ajout.php">
+                <label>Ajouter un article :</label>
+                <input type="submit" value="Ajout"><br><br>
+            </form>
 
 
-        
-    </div>
+            <?php
+            //recuperer les billets
+            $req = $bdd->query('SELECT id, titre, photo, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM article ORDER BY date_creation DESC');
+            while ($donnees = $req->fetch()) {
+            ?>
+                <div class="bg-info">
+                    <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
+                    <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
+                    <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
+                    <p><?= htmlspecialchars($donnees['contenu']) ?> </p><hr>
+                </div>
+        <?php
+            }
+            $req->closeCursor();
+        } else {
+            echo 'Vous n\'avez pas les droits pour agir sur les articles.';
+        }
     
-<?php
-include 'footer.php';
-?>
+            
+
+
+
+        ?>
+       
+
+
+    </div>
+
+    <?php
+    include 'footer.php';
+    ?>

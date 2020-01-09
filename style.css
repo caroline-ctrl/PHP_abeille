@@ -38,3 +38,7 @@ body {
       background-color: #343a40 !important;
       color: rgba(255, 255, 255, 0.575) !important;
   }
+
+  .bg-clair{
+      background-color: #f7f7f9 !important;
+  }
