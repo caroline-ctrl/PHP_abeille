@@ -1,9 +1,6 @@
 <?php
 session_start();
 include ('connection_bdd.php');
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +31,13 @@ include ('connection_bdd.php');
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">*HELLO*</a>
+        <a class="navbar-brand" href="#">* HELLO 
+            <?php
+            if (isset($_COOKIE['gateauChoco'])) {
+                echo $_COOKIE['gateauChoco'];
+            }
+            ?>
+            *</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,14 +64,12 @@ include ('connection_bdd.php');
     </nav>
 
     <div class="container bg-blanc" style="margin-top:30px">
+
+
+
         
     </div>
     
-
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
-    </div>
-
-</body>
-
-</html>
+<?php
+include 'footer.php';
+?>

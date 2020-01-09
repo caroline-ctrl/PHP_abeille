@@ -33,3 +33,8 @@ body {
   h5{
       text-align: center;
   }
+
+  .bg-gris{
+      background-color: #343a40 !important;
+      color: rgba(255, 255, 255, 0.575) !important;
+  }

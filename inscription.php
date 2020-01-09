@@ -136,10 +136,6 @@ if (isset($_POST['pseudo']) and isset($_POST['passwd']) and isset($_POST['passwd
     </form>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+    <?php
+include 'footer.php';
+?>

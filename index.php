@@ -106,10 +106,6 @@ include('connection_bdd.php');
     </div>
 
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
-    </div>
-
-</body>
-
-</html>
+<?php
+include 'footer.php';
+?>
