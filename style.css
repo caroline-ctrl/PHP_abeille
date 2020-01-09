@@ -1,0 +1,35 @@
+form {
+    margin: 20px 0 0 20px;
+}
+
+.barre {
+    width: 30%;
+}
+
+.bg-bleu {
+    background-color: #008c8c;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+}
+
+body {
+    background-color: #fafffe;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
+    background-attachment: fixed !important;
+}
+
+.img_pres{
+    width: 350px;
+}
+
+.img_article{
+    width: 200px;
+
+}
+
+.ml-5 {
+    margin-left: 30% !important;
+  }
+
+  h5{
+      text-align: center;
+  }
