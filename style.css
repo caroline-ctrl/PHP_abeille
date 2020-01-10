@@ -21,14 +21,18 @@ body {
     width: 350px;
 }
 
-.img_article{
-    width: 200px;
+.centre{
+    text-align: center;
 
 }
 
-.ml-5 {
+.img_article{
+    width: 200px;
+}
+
+/* .ml-5 {
     margin-left: 30% !important;
-  }
+  } */
 
   h5{
       text-align: center;

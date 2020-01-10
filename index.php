@@ -33,7 +33,7 @@ include('connection_bdd.php');
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="index.php">* HELLO 
+        <a class="navbar-brand" href="index.php">* HELLO
             <?php
             if (isset($_COOKIE['gateauChoco'])) {
                 echo $_COOKIE['gateauChoco'];
@@ -58,7 +58,14 @@ include('connection_bdd.php');
             </div>
             <div class="navbar-nav">
                 <li class="nav-item">
+                    <!-- pour cacher "ecrire un article" quand on est pas connecté-->
+                    <?php
+                    if(isset($_COOKIE['gateauChoco'])){
+                        ?>
                     <a class="nav-link text-right" href="article.php">Ecrire un article</a>
+                        <?php
+                    }
+                    ?>
                 </li>
             </div>
             </ul>
@@ -82,11 +89,13 @@ include('connection_bdd.php');
                 while ($donnees = $req->fetch()) {
                 ?>
                     <br>
-                    <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5><p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
-                    <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
-                    <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
-                    <hr>
-
+                    <div class="centre">
+                        <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
+                        <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
+                        <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
+                        <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
+                        <hr>
+                    </div>
                 <?php
                 }
                 ?>
@@ -95,6 +104,6 @@ include('connection_bdd.php');
     </div>
 
 
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>
