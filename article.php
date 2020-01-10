@@ -74,9 +74,8 @@ include('connection_bdd.php');
                 if($verif['id_type'] == 2){
                     ?>
                     <!-- pour ajouter un billet -->
-            <form action="admin_ajout.php">
-                <label>Ajouter un article :</label>
-                <input type="submit" value="Ajout"><br><br>
+            <form action="article_ajout.php">
+                <button type="submit" class="btn btn-link bg-dark-1-warning">Ajouter un article</button>
             </form>
 
 
@@ -88,9 +87,9 @@ include('connection_bdd.php');
                 <div class="rounded mt-5 bg-jaune centre">
                     <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
                     <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
-                    <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
+                    <img class="img-responsive ml-5 img_article" src="images/<?= $donnees['photo'] ?>" alt="photos">
                     <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
-                    <a href="admin_modif.php?article=<?= $donnees['id']; ?>">Modifier</a><br><a href="admin_supp.php?article=<?= $donnees['id']; ?>">Supprimer</a></p>
+                    <a href="article_modif.php?article=<?= $donnees['id']; ?>">Modifier</a><br><a href="article_supp.php?article=<?= $donnees['id']; ?>">Supprimer</a></p>
                 </div>
         <?php
             }

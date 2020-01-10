@@ -50,3 +50,9 @@ body {
   .bg-jaune{
     background-image: linear-gradient(to bottom, #ffdb6e, 20%, white) !important;
   }
+
+  .bg-dark-1-warning {
+    background-color:#e7ae00 !important;
+    text-decoration: none !important;
+    color: white !important;
+   }

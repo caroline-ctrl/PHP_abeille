@@ -1,13 +1,15 @@
 <?php
 session_start();
-include('connection_bdd.php');
-?>
 
+include('connection_bdd.php');
+
+
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Commentaires</title>
+    <title>Accueil</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -72,77 +74,55 @@ include('connection_bdd.php');
         </div>
     </nav>
 
-
-    <a href="index.php">Retour à la page d'accueil</a>
-
     <div class="container">
-            <?php
-            // permet de récuperer l'article selectionné sur la page index.php
-            $req = $bdd->prepare('SELECT id, titre, photo, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM article WHERE id = ?');
-            $req->execute(array($_GET['article'])); // permet de récuperer l'id qui est sur la page article.
-            $donnees = $req->fetch();
-
-            //verifie que l'article demandé existe, si oui les commentaires sont visibles ainsi que le formulaire sinon, message d'erreur
-            if (empty($donnees)) {
-                echo "<br><strong>Ce billet n'existe pas</strong>";
-            } else {
-            ?>
-                <div class="centre">
-                    <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
-                    <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
-                    <img class="img-responsive ml-5 img_article" src="images/<?= $donnees['photo'] ?>" alt="photos">
-                    <p class="mt-3"><?= htmlspecialchars($donnees['contenu']) ?> </p>
-                </div>
-
-
-        <h2 class="mt-5">Commentaires</h2>
         <?php
-                $req->closeCursor();
-                // affiche les commentaires liés à l'article selectionné
-                $com = $bdd->prepare('SELECT auteur, commentaire, DATE_FORMAT(date_commentaire, "%d/%m/%Y à %Hh%imin%ss") AS date_com FROM commentaire WHERE id_article = ? ORDER BY date_commentaire DESC LIMIT 0, 5');
-                $com->execute(array($_GET['article']));
-                while ($essaie = $com->fetch()) {
+        // permet de récuperer l'article selectionné sur la page index.php
+        $req = $bdd->prepare('SELECT id, photo, titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM article WHERE id = ?');
+        $req->execute(array($_GET['article'])); // permet de récuperer l'id qui est sur la page index.
+        $donnees = $req->fetch();
         ?>
-            <p><strong><?= htmlspecialchars($essaie['auteur']) ?></strong> le <?= htmlspecialchars($essaie['date_com'])  ?><br>
-                <?= htmlspecialchars($essaie['commentaire']) ?></p>
+        <div class="centre">
+            <h5 class="text-center mt-5"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
+            <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
+            <img class="img-responsive ml-5 img_article" src="images/<?= htmlspecialchars($donnees['photo']) ?>" alt="photos">
+            <p class="mt-3"><?= htmlspecialchars($donnees['contenu']) ?> </p>
+        </div>
 
-        <?php
-                }
-                $req->closeCursor();
-        ?>
 
+        <!-- FORMULAIRE DE MODIFICATION -->
+        <h2 class="mt-5">Modifier l'article</h2>
 
-        <!-- formulaire permettant d'ajouter un commentaire à l'article -->
-        <h2 class="mt-5">Ajouter un commentaire au billet</h2>
-
-        <form action="commentaire_post.php?article=<?= $donnees['id']; ?>" method="post">
+        <form action="article_modif1.php?article=<?= $donnees['id']; ?>" method="post">
 
             <div class="form-group row">
-                <label for="nom" class="col-sm-2 col-form-label col-form-label-sm">Votre nom</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm barre" name="auteur">
+                    <input type="hidden" class="form-control form-control-sm barre" name="id" value="<?= $donnees['id']; ?>">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="commentaire" class="col-sm-2 col-form-label col-form-label-sm">Votre commentaire</label>
+                <label for="titre" class="col-sm-2 col-form-label col-form-label-sm">Titre</label>
                 <div class="col-sm-10">
-                    <textarea name="commentaire" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <input type="text" class="form-control form-control-sm barre" name="titre" value="<?= $donnees['titre']; ?>">
                 </div>
             </div>
             <div class="form-group row">
+                <label for="contenu" class="col-sm-2 col-form-label col-form-label-sm">Contenu</label>
                 <div class="col-sm-10">
-                    <input type="hidden" class="form-control form-control-sm barre" name="id_article" value="<?= $donnees['id']; ?>">
+                    <textarea name="contenu" class="form-control" id="exampleFormControlTextarea1" rows="3" value="<?= $donnees['contenu']; ?>"><?= $donnees['contenu']; ?></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="photo" class="col-sm-2 col-form-label col-form-label-sm">Photo</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control form-control-sm barre" name="photo" value="<?= $donnees['photo']; ?>">
+                    <small class="form-text text-muted">Vous devez renseigner le nom et l'extension de la photo</small>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-primary">Valider</button>
         </form>
-
-
-    <?php
-            }
-    ?>
     </div>
+
     <?php
-    include('footer.php');
+    include 'footer.php';
     ?>

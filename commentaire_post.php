@@ -35,8 +35,7 @@ include('connection_bdd.php');
 			echo "<br>ATTENTION, Vous n'avez pas rempli tous les champs !";
 		}
     }
-    
-    $req->closeCursor();
+ 
     
     include('footer.php');
     header('location: index.php');

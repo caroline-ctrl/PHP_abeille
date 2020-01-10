@@ -98,7 +98,7 @@ include('connection_bdd.php');
                     <div class="centre">
                         <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
                         <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
-                        <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
+                        <img class="img-responsive ml-5 img_article" src="images/<?= $donnees['photo'] ?>" alt="photos">
                         <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
                         <!-- pour cacher "commentaire" quand on est pas connecté-->
                     <?php
