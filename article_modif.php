@@ -16,6 +16,8 @@ include('connection_bdd.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="style.css">
 
     <style>
@@ -34,45 +36,9 @@ include('connection_bdd.php');
 
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="index.php">* HELLO
-            <?php
-            if (isset($_COOKIE['gateauChoco'])) {
-                echo $_COOKIE['gateauChoco'];
-            }
-            ?>
-            *</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-            <div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="inscription.php">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="connexion.php">Connection</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="deconnexion.php">Deconnection</a>
-                    </li>
-            </div>
-            <div class="navbar-nav">
-                <li class="nav-item">
-                    <!-- pour cacher "ecrire un article" quand on est pas connecté-->
-                    <?php
-                    if (isset($_COOKIE['gateauChoco'])) {
-                    ?>
-                        <a class="nav-link text-right" href="article.php">Ecrire un article</a>
-                    <?php
-                    }
-                    ?>
-                </li>
-            </div>
-            </ul>
-        </div>
-    </nav>
+    <?php
+    include('navbar.php');
+    ?>
 
     <div class="container">
         <?php

@@ -1,20 +1,8 @@
 <?php
 session_start();
 include('connection_bdd.php');
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="style.css" rel="stylesheet" media="screen" type="text/css" />
-    <title>Ajout un commentaire</title>
-</head>
-
-<body>
-    <?php
+   
     //verif que le formulaire est bien rempli
     if (isset($_POST['auteur']) AND isset($_POST['commentaire']))
 	{
@@ -36,8 +24,7 @@ include('connection_bdd.php');
 		}
     }
  
-    
-    include('footer.php');
+   
     header('location: index.php');
 
 	?>
