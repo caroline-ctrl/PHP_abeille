@@ -27,11 +27,13 @@ include('connection_bdd.php');
 </head>
 
 <body>
-
+<!-- entete -->
     <div class="jumbotron text-center bg-bleu" style="margin-bottom:0">
         <h1>Mon premier site avec Bootstrap et PHP</h1>
     </div>
 
+
+    <!-- navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="index.php">* HELLO
             <?php
@@ -72,6 +74,7 @@ include('connection_bdd.php');
         </div>
     </nav>
 
+    <!-- presentation -->
     <div class="container bg-blanc" style="margin-top:30px">
         <div class="row">
             <div class="col-sm-4">
@@ -80,6 +83,9 @@ include('connection_bdd.php');
                 <img class="img-responsive img_pres" src="images/bee4.jpg" alt="ma photo">
                 <p>Je suis une petite abeille qui apprends à butiner sans gaspillage.</p>
 
+
+
+    <!-- articles -->
             </div>
             <div class="offset-sm-1 col-sm-7">
                 <h2 id="articles">Voici les articles que j'ai écrits.</h2>
@@ -94,6 +100,14 @@ include('connection_bdd.php');
                         <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
                         <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
                         <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
+                        <!-- pour cacher "commentaire" quand on est pas connecté-->
+                    <?php
+                    if(isset($_COOKIE['gateauChoco'])){
+                        ?>
+                        <a href="commentaire.php?article=<?= $donnees['id']; ?>">Commentaires</a>
+                        <?php
+                    }
+                    ?>
                         <hr>
                     </div>
                 <?php

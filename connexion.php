@@ -88,8 +88,6 @@ if(isset($_POST['connec']) AND isset($_POST['pass'])){
             </div>
         </div>
 
-
-
         <button type="submit" class="btn btn-primary">Se connecter</button>
     </form>
 

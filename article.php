@@ -85,11 +85,12 @@ include('connection_bdd.php');
             $req = $bdd->query('SELECT id, titre, photo, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_crea FROM article ORDER BY date_creation DESC');
             while ($donnees = $req->fetch()) {
             ?>
-                <div class="bg-info centre">
+                <div class="rounded mt-5 bg-jaune centre">
                     <h5 class="text-center"><strong><?= htmlspecialchars($donnees['titre']) ?></strong></h5>
                     <p class="text-center"><i> le <?= htmlspecialchars($donnees['date_crea'])  ?></i></p>
                     <img class="img-responsive ml-5 img_article" src="<?= $donnees['photo'] ?>" alt="photos">
-                    <p><?= htmlspecialchars($donnees['contenu']) ?> </p><hr>
+                    <p><?= htmlspecialchars($donnees['contenu']) ?> </p>
+                    <a href="admin_modif.php?article=<?= $donnees['id']; ?>">Modifier</a><br><a href="admin_supp.php?article=<?= $donnees['id']; ?>">Supprimer</a></p>
                 </div>
         <?php
             }

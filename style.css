@@ -7,7 +7,7 @@ form {
 }
 
 .bg-bleu {
-    background-color: #008c8c;
+    background-color: #ffc107;
     background-image: url("https://www.transparenttextures.com/patterns/black-thread-light.png");
 }
 
@@ -45,4 +45,8 @@ body {
 
   .bg-clair{
       background-color: #f7f7f9 !important;
+  }
+
+  .bg-jaune{
+    background-image: linear-gradient(to bottom, #ffdb6e, 20%, white) !important;
   }
